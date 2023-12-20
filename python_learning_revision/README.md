@@ -15,3 +15,7 @@ Here you will find different notebooks about various data structures in python
 - intersect1d: intersection between arrays
 - setdiff1d: set difference of two arrays (Returns unique values that are in first array but not in second array)
 - 
+
+### Regex:
+- ^ - Startswith
+- $ - Endswith

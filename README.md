@@ -14,3 +14,6 @@ Reference course link: [Deep Learning with PyTorch (2023)](https://www.youtube.c
 
 - [SQL Window functions practice databases](https://www.sqltutorial.org/sql-sample-database/)
 * From the above link I used HR sample database to write queries present in [window_functions](sql_practice/window_func_practice.sql)
+
+- __Flutter__: Learning flutter for application building
+Further link to that repository is [Flutter_learning](https://github.com/rishi-wqd190004/learning_flutter)

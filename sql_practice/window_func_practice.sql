@@ -125,3 +125,85 @@ SELECT
 FROM employees as emp
 INNER JOIN departments as dep
 ON dep.department_id = emp.department_id;
+
+-- CUME_DIST()
+-- Creating a view department_headcounts
+CREATE OR REPLACE VIEW department_headcounts
+AS
+SELECT 
+    department_name, 
+    COUNT(employee_id) headcount
+FROM employees as emp
+INNER JOIN departments as dep
+ON dep.department_id = emp.department_id
+GROUP BY emp.department_id;
+
+-- From the created view get the headcount for each department
+SELECT
+    department_name,
+    headcount,
+    ROUND(CUME_DIST() OVER (
+        ORDER BY headcount
+    ), 3) cume_dist_val
+FROM department_headcounts;
+
+--DENSE_RANK()
+CREATE TABLE IF NOT EXISTS t (
+    col CHAR
+);
+INSERT INTO t(col)
+VALUES('A'),('B'),('B'),('C'),('D'),('D'),('E');
+SELECT * FROM t;
+
+SELECT
+    col,
+    DENSE_RANK() OVER (
+        ORDER BY col
+    ) my_dense_rank,
+    RANK() OVER (
+        ORDER BY col
+    ) my_rank
+FROM t;
+
+-- Ranking employees by their salaries
+SELECT
+    CONCAT(first_name, ' ', last_name) full_name,
+    department_name,
+    salary,
+    DENSE_RANK() OVER (
+        ORDER BY salary DESC
+    ) rank_by_salary
+FROM employees as emp
+INNER JOIN departments as dep
+ON emp.department_id = dep.department_id;
+
+-- Ranking employees in each department by their salaries
+SELECT
+    CONCAT(first_name, ' ', last_name) full_name,
+    department_name,
+    salary,
+    DENSE_RANK() OVER (
+        PARTITION BY department_name
+        ORDER BY salary DESC
+    ) rank_by_department
+FROM employees as emp
+INNER JOIN departments as dep
+ON emp.department_id = dep.department_id;
+
+-- Employees who have the highest salary in their deparment
+-- Use the above query and add where rank_by_department = 1
+
+SELECT * 
+FROM (
+    SELECT
+        CONCAT(first_name, ' ', last_name) full_name,
+        department_name,
+        salary,
+        DENSE_RANK() OVER (
+            PARTITION BY department_name
+            ORDER BY salary DESC
+        ) rank_by_department
+    FROM employees as emp
+    INNER JOIN departments as dep
+    ON emp.department_id = dep.department_id) as ranks
+WHERE rank_by_department = 1;

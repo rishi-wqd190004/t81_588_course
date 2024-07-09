@@ -22,3 +22,7 @@ def double(x):
 doubled = map(lambda x: x*2, int_lst)
 #print(list(doubled))
 
+# merge and sort list
+l1 = [3,5,55,34,33,46]
+l2 = [2,4,55,66,77,98,99]
+print(sorted((l1+l2)))

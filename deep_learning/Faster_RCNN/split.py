@@ -1,7 +1,7 @@
 # Task: Split the data based on train, test and validate text file for further training
 import pandas as pd
 
-full_csv = f'../dataset_DL/BCCD_Dataset/full.csv'
+full_csv = f'../dataset_DL/BCCD_Dataset/raw_data.csv'
 train_txt = f'../dataset_DL/BCCD_Dataset/BCCD/ImageSets/Main/train.txt'
 val_txt = f'../dataset_DL/BCCD_Dataset/BCCD/ImageSets/Main/val.txt'
 test_txt = f'../dataset_DL/BCCD_Dataset/BCCD/ImageSets/Main/test.txt'

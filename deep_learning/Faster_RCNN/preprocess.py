@@ -28,4 +28,5 @@ for name in anotations:
             cnt += 1
 
 df = pd.DataFrame(rows, columns=columns)
-df.to_csv('train.csv', index=False)
+df_sorted = df.sort_values(by='img_name')
+df_sorted.to_csv('/Users/rishinigam/t81_588_course/deep_learning/dataset_DL/BCCD_Dataset/raw_data.csv', index=False)
